@@ -175,7 +175,7 @@ object DestinasiHome : DestinasiNavigasi {
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
-    onDeleteClick: (Int) -> Unit = {},
+    onDetailClick: (Int) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -199,8 +199,21 @@ fun HomeScreen(
                     contentDescription = "Add Kontak")
             }
         }
-    ){
+    ){ innerPadding ->
 
+        HomeStatus(
+            kontakUIState = viewModel.kontakUIState,
+            retryAction = {
+                viewModel.getKontak()
+            },
+            modifier = Modifier.padding(innerPadding),
+
+            onDetailClick = onDetailClick,
+            onDeleteClick = {
+                viewModel.deleteKontak(it.id)
+                viewModel.getKontak()
+            }
+        )
     }
 }
 

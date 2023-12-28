@@ -34,8 +34,12 @@ import com.example.roomdatabaseapi.model.Kontak
 import com.example.roomdatabaseapi.ui.home.viewmodel.KontakUIState
 
 @Composable
-fun HomeScreen(
-    kontakUIState: KontakUIState, retryAction: () -> Unit, modifier: Modifier = Modifier
+fun HomeStatus(
+    kontakUIState: KontakUIState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Kontak) -> Unit = {},
+    onDetailClick: (Kontak) -> Unit
 ){
     when (kontakUIState) {
         is KontakUIState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
